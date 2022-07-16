@@ -30,7 +30,7 @@ const LogReader = (pathToFile: string) => {
     throw err
   }
 
-  returnObject.visits = values
+  returnObject.visits = values.filter((value) => !!value.length) // gets rid of newline at end of file
 
   return returnObject
 }
