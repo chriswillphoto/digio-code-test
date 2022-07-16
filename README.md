@@ -1,5 +1,7 @@
 # DigIO Programming Task
 
+This is a node.js program designed to parse a particular format of log file and print predetermined meaningful data to the console.
+
 ## First 
 
 run ```npm install``` to install necessary packages and dependencies
