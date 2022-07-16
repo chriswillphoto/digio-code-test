@@ -1,44 +1,44 @@
-import fs from 'fs'
-import path from 'path'
+import fs from "fs";
+import path from "path";
 
-export interface AnalysisObject {
-  visits: string[],
-  visitsByIp: visitsByIp,
-  visitsByUrl: visitsByUrl
-}
-
-type visitsByIp = {
-  [key: string]: number
-}
-
-type visitsByUrl = {
-  [key: string]: number
-}
+import { AnalysisObject, ipv4RegExp, urlRegExp } from "./types";
 
 const LogReader = (pathToFile: string) => {
-  const fullPath = path.resolve(pathToFile)
+  const fullPath = path.resolve(pathToFile);
   const returnObject: AnalysisObject = {
     visits: [],
     visitsByIp: {},
-    visitsByUrl: {}
-  }
-  let values
+    visitsByUrl: {},
+  };
+  let values;
 
   try {
-    values = readFile(fullPath)
-  } catch (err){
-    throw err
+    values = readFile(fullPath);
+  } catch (err) {
+    throw err;
   }
 
-  returnObject.visits = values.filter((value) => !!value.length) // gets rid of newline at end of file
+  values = values.filter((value) => !!value.length); // gets rid of newline at end of file
 
-  return returnObject
-}
+  if (!values.every(validateLine)) throw "Error: Invalid log file";
+
+  returnObject.visits = values;
+
+  return returnObject;
+};
 
 const readFile = (path: string) => {
-  const array = fs.readFileSync(path).toString().replace(/\r\n/g,'\n').split('\n');
+  const array = fs
+    .readFileSync(path)
+    .toString()
+    .replace(/\r\n/g, "\n")
+    .split("\n");
 
-  return array
-}
+  return array;
+};
 
-export default LogReader
+const validateLine = (line: string) => {
+  return urlRegExp.test(line) && ipv4RegExp.test(line);
+};
+
+export default LogReader;
