@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npx ts-node src/main.ts",
+    "dev": "npx ts-node src/main.ts programming-task-example-data.log",
     "lint": "eslint src",
     "build": "npx tsc",
     "start": "npm run build && node dist/main.js",
-    "test": "jest --verbose ___tests___"
+    "test": "jest --verbose ___tests___",
+    "example": "npm run build && node dist/main.js programming-task-example-data.log"
   },
   "keywords": [],
   "author": "",
