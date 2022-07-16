@@ -1,4 +1,4 @@
-import { AnalysisObject } from '../src/LogReader'
+import { AnalysisObject } from '../src/types'
 import UrlHandler from '../src/UrlHandler'
 
 const input: AnalysisObject = {
