@@ -1,9 +1,9 @@
-import { AnalysisObject } from "./LogReader";
+import { AnalysisObject, ipv4RegExp } from "./types";
 
 const IpAddressHandler = (accumulator: AnalysisObject) => {
-  const ipv4Regex = new RegExp("(?:[0-9]{1,3}.){3}[0-9]{1,3}");
+  
   accumulator.visits.forEach((visit) => {
-    const regexTest = visit.match(ipv4Regex);
+    const regexTest = visit.match(ipv4RegExp);
 
     if (regexTest) {
       const ipAddress = regexTest[0];
